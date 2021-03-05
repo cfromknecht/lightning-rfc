@@ -299,7 +299,7 @@ all paths.
 Note that `amt_to_forward` is the amount for this HTLC only: a
 `total_msat` field containing a greater value is a promise by the
 ultimate sender that the rest of the payment will follow in succeeding
-HTLCs; we call these outstanding HTLCs which have the same preimage,
+HTLCs; we call these outstanding HTLCs which have the same `payment_secret`,
 an "HTLC set".
 
 #### Requirements
@@ -329,7 +329,7 @@ The final node:
   - if it does not support `basic_mpp`:
     - MUST fail the HTLC if `total_msat` is not exactly equal to `amt_to_forward`.
   - otherwise, if it supports `basic_mpp`:
-    - MUST add it to the HTLC set corresponding to that `payment_hash`.
+    - MUST add it to the HTLC set corresponding to that `payment_secret`.
     - SHOULD fail the entire HTLC set if `total_msat` is not the same for
       all HTLCs in the set.
     - if the total `amount_msat` of this HTLC set equals `total_msat`:
